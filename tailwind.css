@@ -1,0 +1,258 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::selection {
+	@apply bg-blue-200 text-gray-900;
+}
+
+:root {
+	--font-sora: "Sora", sans-serif;
+	--font-code: "Source Code Pro", monospace;
+	--font-grotesk: "Space Grotesk", sans-serif;
+	color-scheme: dark;
+}
+
+* {
+	scroll-behavior: smooth;
+}
+
+@layer base {
+	:root {
+		--background: 0 0% 100%;
+		--background-sidebar: hsl(0, 0%, 98%);
+		--background-1: hsl(210, 20%, 98%);
+		--background-2: hsl(210, 15%, 90%);
+		--foreground: 240 10% 3.9%;
+		--card: 210 20% 99%;
+		--card-foreground: 240 10% 3.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 240 10% 3.9%;
+		--primary: 260 97% 50%;
+		--primary-foreground: 355.7 100% 97.3%;
+		--secondary: 240 4.8% 95.9%;
+		--secondary-foreground: 240 5.9% 10%;
+		--muted: 240 4.8% 95.9%;
+		--muted-foreground: 240 3.8% 46.1%;
+		--accent: 0deg 0% 91.49%;
+		--accent-foreground: 240 5.9% 10%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
+		--border: 240 5.9% 90%;
+		--input: 240 5.9% 90%;
+		--ring: 260 97% 50%;
+		--radius: 0.5rem;
+	}
+
+	.dark {
+		--background: 225 15% 12%; /* Deep, rich midnight blue-black */
+		--background-sidebar: hsl(225, 18%, 10%); /* Slightly lighter than background */
+		--background-1: hsl(225, 15% 16%); /* Soft, deep blue-gray */
+		--background-2: hsl(225, 15% 20%); /* Slightly lighter blue-gray */
+		--foreground: 210 20% 90%; /* Soft, light text */
+		--card: 225 15% 18%; /* Subtle card background */
+		--card-foreground: 210 20% 90%;
+		--popover: 225 15% 16%;
+		--popover-foreground: 210 20% 90%;
+		--primary: 250 50% 57%; /* Maintaining original primary */
+		--primary-foreground: 0 0% 100%;
+		--secondary: 225 10% 25%; /* Muted, sophisticated gray */
+		--secondary-foreground: 210 20% 85%;
+		--muted: 225 10% 20%; /* Deep muted tone */
+		--muted-foreground: 210 10% 60%;
+		--accent: 190 50% 35%; /* Soft, deep teal */
+		--accent-foreground: 0 0% 100%;
+		--destructive: 350 70% 50%; /* Rich, deep red */
+		--destructive-foreground: 0 0% 100%;
+		--border: 225 15% 25%; /* Subtle border */
+		--input: 225 15% 30%; /* Slightly lighter input */
+		--ring: 250 50% 57%;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+
+.rotate-45 {
+	@apply rotate-[45deg];
+}
+
+.rotate-90 {
+	@apply rotate-[90deg];
+}
+
+.rotate-135 {
+	@apply rotate-[135deg];
+}
+
+.rotate-180 {
+	@apply rotate-[180deg];
+}
+
+.rotate-225 {
+	@apply rotate-[225deg];
+}
+
+.rotate-270 {
+	@apply rotate-[270deg];
+}
+
+.rotate-315 {
+	@apply rotate-[315deg];
+}
+
+.rotate-360 {
+	@apply rotate-[360deg];
+}
+
+.-rotate-45 {
+	@apply rotate-[-45deg];
+}
+
+.-rotate-90 {
+	@apply rotate-[-90deg];
+}
+
+.-rotate-135 {
+	@apply rotate-[-135deg];
+}
+
+.-rotate-180 {
+	@apply rotate-[-180deg];
+}
+
+.-rotate-225 {
+	@apply rotate-[-225deg];
+}
+
+.-rotate-270 {
+	@apply rotate-[-270deg];
+}
+
+.-rotate-315 {
+	@apply rotate-[-315deg];
+}
+
+.-rotate-360 {
+	@apply rotate-[-360deg];
+}
+
+/* Landing Page Start */
+
+.landing-page {
+	@apply font-sans bg-n-8 text-n-1 text-base;
+}
+
+.landing-container {
+	@apply max-w-[77.5rem] mx-auto px-5 md:px-10 lg:px-15 xl:max-w-[87.5rem];
+}
+
+.hero-title {
+	@apply font-semibold text-[2.5rem] leading-[3.25rem] md:text-[2.75rem] md:leading-[3.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem];
+}
+
+.hero-subtitle {
+	@apply text-[0.875rem] leading-[1.5rem] md:text-[1rem] md:leading-[1.75rem] lg:text-[1.25rem] lg:leading-8;
+}
+
+.landing-h2 {
+	@apply text-[1.75rem] leading-[2.5rem] md:text-[2rem] md:leading-[2.5rem] lg:text-[2.5rem] lg:leading-[3.5rem] xl:text-[3rem] xl:leading-tight;
+}
+
+.landing-body-2 {
+	@apply font-light text-[0.875rem] leading-6 md:text-base;
+}
+
+.landing-button {
+	@apply font-code text-xs font-bold uppercase tracking-wider;
+}
+
+.landing-tagline {
+	@apply font-grotesk font-light text-xs tracking-tagline uppercase;
+}
+
+.landing-h3 {
+	@apply text-[2rem] leading-normal md:text-[2.5rem];
+}
+
+.no-visible-scrollbar {
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	-webkit-overflow-scrolling: touch;
+}
+
+.no-visible-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+
+::-webkit-scrollbar {
+	width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-background-2 dark:bg-background-1;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-secondary dark:bg-secondary rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-secondary/80 dark:bg-secondary/70;
+}
+
+/* :root {
+	--background: 260 35% 98%;
+	--foreground: 260 51% 3%;
+	--muted: 260 16% 94%;
+	--muted-foreground: 260 10% 31%;
+	--popover: 260 35% 98%;
+	--popover-foreground: 260 51% 3%;
+	--card: 260 35% 97%;
+	--card-foreground: 260 51% 2%;
+	--border: 260 2% 88%;
+	--input: 260 2% 88%;
+	--primary: 260 97% 50%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 260 20% 91%;
+	--secondary-foreground: 260 20% 31%;
+	--accent: 260 29% 86%;
+	--accent-foreground: 260 29% 26%;
+	--destructive: 8 87% 24%;
+	--destructive-foreground: 8 87% 84%;
+	--ring: 260 97% 50%;
+	--radius: 0.5rem;
+}
+
+.dark {
+	--background: 260 30% 3%;
+	--foreground: 260 32% 97%;
+	--muted: 260 16% 6%;
+	--muted-foreground: 260 10% 69%;
+	--popover: 260 30% 3%;
+	--popover-foreground: 260 32% 97%;
+	--card: 260 30% 4%;
+	--card-foreground: 260 32% 98%;
+	--border: 260 2% 11%;
+	--input: 260 2% 11%;
+	--primary: 260 97% 50%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 260 13% 16%;
+	--secondary-foreground: 260 13% 76%;
+	--accent: 260.2 95.15% 59.61%;
+	--accent-foreground: 260 21% 85%;
+	--destructive: 8 87% 50%;
+	--destructive-foreground: 0 0% 100%;
+	--ring: 260 97% 50%;
+} */
