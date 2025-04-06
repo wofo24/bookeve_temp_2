@@ -10,97 +10,229 @@
 6. [Components](#components)
 7. [Styling](#styling)
 8. [Configuration](#configuration)
+9. [Routing](#routing)
+10. [State Management](#state-management)
+11. [Testing](#testing)
+12. [Performance](#performance)
+13. [Security](#security)
+14. [Deployment](#deployment)
 
 ## Project Overview
-This is a Next.js project with TypeScript, utilizing modern UI components built with Radix UI and styled using Tailwind CSS. The project features dynamic subdomain routing and a component-based architecture.
+This is a Next.js project with TypeScript that implements a modern web application with dynamic subdomain routing. The application uses Radix UI components for accessible UI elements and Tailwind CSS for styling. The project follows component-based architecture principles and implements modern web development best practices.
+
+### Key Features
+- Dynamic subdomain routing
+- Component-based architecture
+- Accessible UI components
+- Responsive design
+- Dark/Light theme support
+- Type-safe development
 
 ## Tech Stack
+### Core Technologies
 - Next.js 15.2.4
 - React 19
 - TypeScript
 - Tailwind CSS
 - Radix UI Components
+
+### Development Tools
 - ESLint for code quality
 - PostCSS for CSS processing
+- Geist font family integration
+- Lucide React for icons
 
 ## Getting Started
-1. Start the development server:
+
+### Prerequisites
+- Node.js (Latest LTS version recommended)
+- npm package manager
+
+### Development Environment Setup
+1. Install dependencies:
+```bash
+npm install
+```
+
+2. Start the development server:
 ```bash
 npm run dev
 ```
-2. Open your browser to see the result
-3. Start editing pages in the `pages` directory
+
+3. Open your browser to see the result
+4. Start editing pages in the `pages` directory
 
 ## Project Structure
 ```
 ├── components/          # Reusable UI components
+│   └── ui/
+│       ├── shared/     # Shared UI components
+│       └── Header.tsx  # Main header component
 ├── pages/              # Next.js pages and routing
+│   ├── [subdomain].tsx # Dynamic subdomain handling
+│   ├── _app.tsx       # App wrapper
+│   └── index.tsx      # Main entry point
 ├── public/            # Static assets
 ├── styles/           # Global styles and CSS
-├── utils/            # Utility functions and helpers
+├── utils/            # Utility functions
+│   ├── icons/        # SVG icons
+│   └── cn.tsx        # Class name utility
 ```
 
-### Key Files
-- `next.config.ts`: Configuration for subdomain routing
-- `tsconfig.json`: TypeScript configuration
-- `tailwind.config.js`: Tailwind CSS customization
-- `layout.tsx`: Root layout with font configuration
+### Key Files Explained
+- `next.config.ts`: Contains subdomain routing configuration and Next.js settings
+- `tsconfig.json`: TypeScript compiler configuration with strict mode enabled
+- `tailwind.config.js`: Tailwind CSS customization and theme settings
+- `layout.tsx`: Root layout with Geist font configuration
+- `postcss.config.mjs`: PostCSS configuration for Tailwind
+- `eslint.config.mjs`: ESLint configuration for code quality
 
 ## Development Guidelines
 
-### Routing
-- Main pages are in `pages/` directory
-- Dynamic subdomain routing handled via `[subdomain].tsx`
-- Custom configurations in `next.config.ts`
+### Code Style
+1. **TypeScript**
+   - Use strict mode
+   - Define proper interfaces and types
+   - Avoid using `any` type
+   - Use type inference when possible
 
-### Components
+2. **React Best Practices**
+   - Use functional components
+   - Implement proper prop types
+   - Use hooks effectively
+   - Follow component composition patterns
+
+3. **File Naming Conventions**
+   - Components: PascalCase (e.g., `Button.tsx`)
+   - Utilities: camelCase (e.g., `formatDate.ts`)
+   - Pages: kebab-case (e.g., `user-profile.tsx`)
+
+### Routing System
+- Pages-based routing in `pages/` directory
+- Dynamic routes using `[param].tsx` naming
+- Subdomain handling via `[subdomain].tsx`
+- API routes in `pages/api/`
+
+## Components
+
+### Shared Components
 Located in `components/ui/shared/`:
-- Button
-- Card
-- Checkbox
-- Collapsible
-- Grid
-- Input
-- Label
-- Popover
-- Radio Group
-- Select
-- Tabs
 
-### Styling
-- Uses Tailwind CSS with custom configuration
-- Custom theme variables defined in `tailwind.css`
-- Global styles in `styles/globals.css`
-- Fonts: Geist Sans and Geist Mono
+#### Core Components
+- **Button**: Customizable button component with variants
+- **Card**: Flexible card layout component
+- **Input**: Form input component with validation
+- **Select**: Dropdown selection component
+- **Tabs**: Tabbed interface component
 
-### Theme Configuration
-Default theme variables are set in `tailwind.css`:
-- Light/Dark mode support
+#### Form Components
+- **Checkbox**: Custom checkbox input
+- **RadioGroup**: Radio button group
+- **Label**: Form label component
+
+#### Layout Components
+- **Grid**: Grid layout system
+- **Collapsible**: Expandable content section
+- **Popover**: Popup content display
+
+### Component Usage Guidelines
+1. **Props Interface**
+```typescript
+interface ButtonProps {
+  variant?: 'primary' | 'secondary' | 'outline';
+  size?: 'sm' | 'md' | 'lg';
+  children: React.ReactNode;
+  onClick?: () => void;
+}
+```
+
+2. **Component Structure**
+```typescript
+const Component = ({ prop1, prop2 }: ComponentProps) => {
+  // State and effects
+  // Component logic
+  return <JSX>;
+};
+```
+
+## Styling
+
+### Tailwind Configuration
+- Custom theme variables in `tailwind.css`
+- Dark/Light mode support
 - Custom color schemes
-- Font families
-- Component-specific styling
+- Responsive design utilities
 
-## UI Components
-All shared components are built using Radix UI primitives and styled with Tailwind CSS. They provide:
-- Accessibility out of the box
-- Consistent styling
-- Customizable variants
-- Type-safe props
+### Theme System
+```css
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --primary: 260 97% 50%;
+  /* ... other variables */
+}
 
-## Development Workflow
-1. Create new components in appropriate directories
-2. Follow existing component patterns
-3. Use TypeScript for type safety
-4. Maintain consistent styling using Tailwind utilities
-5. Test changes using the development server
+.dark {
+  --background: 225 15% 12%;
+  --foreground: 210 20% 90%;
+  /* ... dark theme variables */
+}
+```
 
-## Best Practices
-1. Use TypeScript for all new files
-2. Follow component-based architecture
-3. Maintain consistent styling using Tailwind
-4. Keep components modular and reusable
-5. Use proper type definitions
-6. Follow established naming conventions
+### CSS Best Practices
+1. Use Tailwind utilities when possible
+2. Create custom utilities for repeated patterns
+3. Maintain consistent spacing and sizing
+4. Follow mobile-first approach
+
+## Security
+
+### Best Practices
+1. Input validation
+2. XSS prevention
+3. CSRF protection
+4. Secure headers
+5. Environment variables for sensitive data
+
+## Performance
+
+### Optimization Techniques
+1. Image optimization
+2. Code splitting
+3. Dynamic imports
+4. Caching strategies
+5. Bundle size monitoring
 
 ## Deployment
-The project is configured for deployment on Replit. Use the built-in deployment features to publish your changes.
+The project is configured for deployment on Replit:
+
+1. Build the project:
+```bash
+npm run build
+```
+
+2. Use Replit's deployment features to publish
+3. Monitor deployment status
+4. Configure environment variables
+
+### Post-Deployment
+- Monitor performance
+- Check error logs
+- Verify subdomain routing
+- Test functionality
+
+## Version Control
+- Use meaningful commit messages
+- Create feature branches
+- Review code before merging
+- Keep commits atomic
+
+## Documentation
+- Comment complex logic
+- Document API endpoints
+- Update README for major changes
+- Maintain changelog
+
+This wiki serves as a living document. Update it as the project evolves and new patterns emerge.
+
