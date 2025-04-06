@@ -1,4 +1,3 @@
-
 # AI Assistant Documentation
 
 Please refer to:
