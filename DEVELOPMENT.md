@@ -205,22 +205,29 @@ const Component = ({ prop1, prop2 }: ComponentProps) => {
 5. Bundle size monitoring
 
 ## Deployment
-The project is configured for deployment on Replit:
+The project can be deployed using any hosting platform that supports Next.js applications:
 
 1. Build the project:
 ```bash
 npm run build
 ```
 
-2. Use Replit's deployment features to publish
-3. Monitor deployment status
-4. Configure environment variables
+2. Start the production server:
+```bash
+npm start
+```
+
+### Environment Setup
+1. Configure your environment variables
+2. Set up your domain and subdomains
+3. Configure your web server for subdomain routing
 
 ### Post-Deployment
-- Monitor performance
-- Check error logs
-- Verify subdomain routing
-- Test functionality
+- Monitor application performance
+- Check server logs
+- Verify subdomain routing functionality
+- Test all features in production
+- Monitor resource usage
 
 ## Version Control
 - Use meaningful commit messages
