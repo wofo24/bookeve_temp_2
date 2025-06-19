@@ -17,7 +17,7 @@ export default function HeroSection() {
           <Image src='/3.png' alt='logo' width={85} height={85} />
         </div>
         <div className='absolute top-[40%] left-[10%] animate-float delay-700'>
-          <Image src='/4.png' alt='logo' width={85} height={85} />
+          <Image src='/4.png' alt='logo' width={85} height={85} />  
         </div>
         <div className='absolute top-[217px] right-[281px] animate-float delay-700'>
           <Image src='/6.png' alt='logo' width={85} height={85} />

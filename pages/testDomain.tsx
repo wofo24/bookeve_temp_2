@@ -109,7 +109,6 @@ export default function ArtistPage() {
       <Head>
         <title>Akanksha&apos;s Page</title>
       </Head>
-
       <Header />
 
       <div className='flex flex-col justify-center items-center bg-gray-100'>
@@ -139,7 +138,9 @@ export default function ArtistPage() {
                 />
                 <span className='text-[20px] font-bold text-black'>2.5k</span>
               </div>
-              <span className='text-[12px] font-[300px] text-black'>Bookings</span>
+              <span className='text-[12px] font-[300px] text-black'>
+                Bookings
+              </span>
             </div>
             <div
               className='flex flex-col backdrop-blur-[17.5px] bg-white/30 shadow-md rounded-[8px]'
@@ -156,7 +157,9 @@ export default function ArtistPage() {
                   <span className='text-[20px]'>4.7 </span>/5
                 </div>
               </div>
-              <span className='text-[12px] font-[300px] text-black flex items-center'>207 Ratings</span>
+              <span className='text-[12px] font-[300px] text-black flex items-center'>
+                207 Ratings
+              </span>
             </div>
           </div>
 
@@ -518,11 +521,7 @@ export default function ArtistPage() {
                     </span>
                     <div className='flex justify-center mt-[2px] gap-[2px]'>
                       {[...Array(5)].map((_, i) => (
-                        <StarIcon
-                          key={i}
-                          width={10.5}
-                          height={10.12}
-                        />
+                        <StarIcon key={i} width={10.5} height={10.12} />
                       ))}
                     </div>
                     <div className='text-xs text-gray-500 mt-1'>
@@ -881,8 +880,8 @@ export default function ArtistPage() {
                             </span>
                           </div>
                           <p className='w-full text-base font-light leading-6 text-gray-900'>
-                            We&apos;ll prepare the necessary tools and products for
-                            your service.
+                            We&apos;ll prepare the necessary tools and products
+                            for your service.
                           </p>
                         </div>
 
@@ -916,8 +915,8 @@ export default function ArtistPage() {
                             </span>
                           </div>
                           <p className='w-full text-base font-light leading-6 text-gray-900'>
-                            We&apos;ll provide aftercare instructions and product
-                            recommendations.
+                            We&apos;ll provide aftercare instructions and
+                            product recommendations.
                           </p>
                         </div>
 
@@ -928,8 +927,8 @@ export default function ArtistPage() {
                             </span>
                           </div>
                           <p className='w-full text-base font-light leading-6 text-gray-900'>
-                            You&apos;ll have the opportunity to schedule your next
-                            appointment.
+                            You&apos;ll have the opportunity to schedule your
+                            next appointment.
                           </p>
                         </div>
                       </div>

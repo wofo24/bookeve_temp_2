@@ -60,7 +60,7 @@ export default function MobileMenu() {
             <Menu className="h-4 w-4" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="w-full max-w-sm p-0 bg-white">
+        <SheetContent side="right" className="w-full max-w-sm p-0 bg-white  ">
           <div className="flex flex-col h-full">
             {/* Header */}
             <div className="p-6 pb-4">
