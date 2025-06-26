@@ -1,11 +1,16 @@
 'use client';
+
 import { useState } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import {
   Menu,
-  X,
   User,
   ShoppingCart,
   Package,
@@ -15,186 +20,135 @@ import {
   HelpCircle,
   UserPlus,
 } from 'lucide-react';
+import Image from 'next/image';
 
-export default function Header() {
+export default function Component() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const menuItems = [
-    {
-      icon: User,
-      title: 'View profile',
-      subtitle: 'Your personal info. & addresses',
-      href: '#',
-    },
-    {
-      icon: ShoppingCart,
-      title: 'Your Cart',
-      subtitle: 'View items you have added to cart',
-      href: '#',
-    },
-    {
-      icon: Package,
-      title: 'Your Bookings',
-      subtitle: 'View your past bookings & orders',
-      href: '#',
-    },
-  ];
-
-  const footerItems = [
-    {
-      icon: MessageCircle,
-      title: 'About Us',
-      href: '#',
-    },
-    {
-      icon: Phone,
-      title: 'Contact Us',
-      href: '#',
-    },
-    {
-      icon: HelpCircle,
-      title: 'FAQs',
-      href: '#',
-    },
-    {
-      icon: UserPlus,
-      title: 'Create Bookeve profile',
-      href: '#',
-    },
-  ];
-
   return (
-    <header className='relative w-full h-48 md:h-64 overflow-visible'>
-      {/* Background Image Layer */}
-      <div className='absolute inset-0 -z-10 overflow-hidden'>
-        <Image
-          src='/bg.png'
-          layout='fill'
-          objectFit='cover'
-          alt='Background Image'
-        />
-      </div>
+    <div className='mb-32 bg-gray-50'>
+      <div className='max-w-md mx-auto bg-white'>
+        {/* Header */}
+        <header className='flex items-center justify-between p-4 bg-white border-b border-gray-200'>
+          {/* Logo */}
+          <div className='flex items-center'>
+            <Image
+              src='/logo.png?height=40&width=120'
+              alt='Logo'
+              width={120}
+              height={40}
+              className='h-8 w-auto'
+            />
+          </div>
 
-      {/* Blurred Navbar Container */}
-      <div className='relative w-full flex justify-between items-center p-4 bg-white/30 backdrop-blur-lg shadow-md rounded-lg'>
-        {/* Logo */}
-        <Link href='/'>
-          <Image src='/logo.png' alt='Bookeve Logo' width={117} height={32} />
-        </Link>
+          {/* Menu Button */}
+          <Drawer open={isOpen} onOpenChange={setIsOpen} direction='right'>
+            <DrawerTrigger asChild>
+              <Button variant='ghost' size='icon' className='h-10 w-10'>
+                <Menu className='h-6 w-6 text-gray-600' />
+                <span className='sr-only'>Open menu</span>
+              </Button>
+            </DrawerTrigger>
 
-        <div>
-          <div className='relative'>
-            <Button
-              className='focus:outline-none'
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              <Menu />
-            </Button>
+            <DrawerContent className='h-full w-full max-w-md ml-auto bg-white text-black'>
+              <div className='flex flex-col h-full'>
+                {/* Header Section */}
+                <DrawerHeader className='p-4 pb-6 border-b'>
+                  <div className='flex items-center'>
+                    <div>
+                      <DrawerTitle className='text-xl font-semibold text-left text-black'>
+                        Hey there 👋
+                      </DrawerTitle>
+                      <p className='text-sm text-gray-600 mt-1'>
+                        You have not logged in yet
+                      </p>
+                    </div>
+                  </div>
+                </DrawerHeader>
 
-            {isOpen && (
-              <>
-                {/* Backdrop */}
-                <div
-                  className='fixed inset-0 bg-black/20 z-40'
-                  onClick={() => setIsOpen(false)}
-                />
-                {/* Menu */}
-                <div className='absolute top-full left-0 w-full max-w-sm bg-white shadow-lg border border-gray-200 rounded-b-lg z-50 max-h-[calc(100vh-200px)] overflow-hidden'>
-                  <div className='flex flex-col h-full'>
-                    {/* Header */}
-                    <div className='p-6 pb-4 border-b border-gray-100 flex-shrink-0'>
-                      <div className='flex items-center justify-between mb-4'>
-                        <Button
-                          variant='ghost'
-                          size='icon'
-                          onClick={() => setIsOpen(false)}
-                          className='h-8 w-8 rounded-full'
-                        >
-                          <X className='h-4 w-4' />
-                        </Button>
-                      </div>
-
-                      <div className='space-y-1'>
-                        <h2 className='text-xl font-semibold text-gray-900'>
-                          Hey Anusha 👋
-                        </h2>
-                        <p className='text-sm text-gray-600'>+91 9876543210</p>
+                {/* Menu Items - keep the same content */}
+                <div className='flex-1 py-4 overflow-y-auto'>
+                  {/* Profile Section */}
+                  <div className='px-4 mb-6'>
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <User className='h-5 w-5 text-gray-600' />
+                      <div>
+                        <p className='font-medium'>View profile</p>
+                        <p className='text-sm text-gray-500'>
+                          Your personal info. & addresses
+                        </p>
                       </div>
                     </div>
 
-                    {/* Main Menu Items */}
-                    <div className='flex-1 px-6 overflow-y-auto'>
-                      <div className='space-y-1 py-4'>
-                        {menuItems.map((item, index) => (
-                          <a
-                            key={index}
-                            href={item.href}
-                            className='flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors'
-                          >
-                            <item.icon className='h-5 w-5 text-gray-600 mt-0.5 flex-shrink-0' />
-                            <div className='space-y-1'>
-                              <p className='font-medium text-gray-900'>
-                                {item.title}
-                              </p>
-                              <p className='text-sm text-gray-600'>
-                                {item.subtitle}
-                              </p>
-                            </div>
-                          </a>
-                        ))}
-                      </div>
-
-                      {/* Log out */}
-                      <div className='mt-4 pb-4'>
-                        <a
-                          href='#'
-                          className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors'
-                        >
-                          <LogOut className='h-5 w-5 text-gray-600' />
-                          <span className='font-medium text-gray-900'>
-                            Log out
-                          </span>
-                        </a>
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <ShoppingCart className='h-5 w-5 text-gray-600' />
+                      <div>
+                        <p className='font-medium'>Your Cart</p>
+                        <p className='text-sm text-gray-500'>
+                          View items you have added to cart
+                        </p>
                       </div>
                     </div>
 
-                    {/* Footer */}
-                    <div className='p-6 pt-4 border-t border-gray-100 flex-shrink-0'>
-                      {/* Logo */}
-                      <div className='mb-6'>
-                        <div className='inline-flex items-center gap-1 px-3 py-1.5 bg-purple-600 rounded-full'>
-                          <span className='text-white font-semibold text-sm'>
-                            book
-                          </span>
-                          <span className='text-white font-semibold text-sm bg-purple-500 px-2 py-0.5 rounded-full'>
-                            eve
-                          </span>
-                        </div>
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <Package className='h-5 w-5 text-gray-600' />
+                      <div>
+                        <p className='font-medium'>Your Bookings</p>
+                        <p className='text-sm text-gray-500'>
+                          View your past bookings & orders
+                        </p>
                       </div>
+                    </div>
 
-                      {/* Footer Links */}
-                      <div className='space-y-1'>
-                        {footerItems.map((item, index) => (
-                          <a
-                            key={index}
-                            href={item.href}
-                            className='flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors'
-                          >
-                            <item.icon className='h-4 w-4 text-purple-600' />
-                            <span className='text-sm font-medium text-gray-900'>
-                              {item.title}
-                            </span>
-                          </a>
-                        ))}
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <LogOut className='h-5 w-5 text-gray-600' />
+                      <div>
+                        <p className='font-medium'>Log out</p>
                       </div>
                     </div>
                   </div>
+
+                  {/* Bookeve Logo */}
+                  <div className='px-4 mb-6'>
+                    <div className='bg-white text-white px-4 py-2 rounded-lg inline-block'>
+                      <Image
+                        src='/logo.png?height=40&width=120'
+                        alt='Logo'
+                        width={120}
+                        height={40}
+                        className='h-8 w-auto'
+                      />
+                    </div>
+                  </div>
+
+                  {/* Bottom Menu Items */}
+                  <div className='px-4 space-y-2'>
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <MessageCircle className='h-5 w-5 text-purple-600' />
+                      <p className='font-medium'>About Us</p>
+                    </div>
+
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <Phone className='h-5 w-5 text-purple-600' />
+                      <p className='font-medium'>Contact Us</p>
+                    </div>
+
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <HelpCircle className='h-5 w-5 text-purple-600' />
+                      <p className='font-medium'>FAQs</p>
+                    </div>
+
+                    <div className='flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 cursor-pointer'>
+                      <UserPlus className='h-5 w-5 text-purple-600' />
+                      <p className='font-medium'>Create Bookeve profile</p>
+                    </div>
+                  </div>
                 </div>
-              </>
-            )}
-          </div>
-        </div>
+              </div>
+            </DrawerContent>
+          </Drawer>
+        </header>
       </div>
-    </header>
+    </div>
   );
 }
