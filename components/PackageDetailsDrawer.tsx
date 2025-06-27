@@ -1,5 +1,5 @@
 import React from 'react';
-import { BottomDrawer } from './ui/shared/bottom-drawer';
+import { BottomDrawer } from './ui/bottom-drawer';
 import { Star, MessageSquare } from 'lucide-react';
 
 interface PackageDetailsProps {

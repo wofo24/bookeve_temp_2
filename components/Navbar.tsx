@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import MobileMenu from './MobileMenu';
-import { Button } from './ui/shared/button';
+import { Button } from './ui/button';
 import Image from 'next/image';
 
 export default function Navbar() {

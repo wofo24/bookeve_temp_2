@@ -19,14 +19,14 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '../components/ui/shared/collapsible';
+} from '../components/ui/collapsible';
 import { useState } from 'react';
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from '../components/ui/shared/tabs';
+} from '../components/ui/tabs';
 import Image from 'next/image';
 import {
   bookingsIcon,
@@ -34,10 +34,10 @@ import {
   profilePicture,
   ratingsIcon,
 } from '../utils/icons';
-import { SearchInput } from '../components/ui/shared/search-input';
+import { SearchInput } from '../components/ui/search-input';
 import RatingsReviews from '../components/RatingsReviews';
-import { Button } from '../components/ui/shared/button';
-import { BottomDrawer } from '../components/ui/shared/bottom-drawer';
+import { Button } from '../components/ui/button';
+import { BottomDrawer } from '../components/ui/bottom-drawer';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, FreeMode } from 'swiper/modules';
 
@@ -45,7 +45,6 @@ export default function ArtistPage() {
   const [search, setSearch] = useState('');
   const [ratingsDrawer, setRatingsDrawerOpen] = useState(false);
   const [showPackageDetails, setShowPackageDetails] = useState(false);
-    const [selectedPackage, setSelectedPackage] = useState(null); 
   const storiesData = [
     {
       id: 1,
@@ -78,56 +77,55 @@ export default function ArtistPage() {
   ];
 
   const services = [
-    { 
-        id: 1, 
-        name: "HD Radiant Bride Makeup Package", 
-        price: "₹2,900", 
-        description: "Complete bridal makeover with premium products.",
-        // 🆕 NEW FIELDS ADDED:
-        rating: 4.8,
-        totalRatings: 123,
-        duration: "1 hr 20 mins",
-        availability: "Available Today",
-        originalPrice: 4200,
-        discountedPrice: 2900,
-        discount: 30,
-        advancePayment: 500,
-        forWomen: true
+    {
+      id: 1,
+      name: 'HD Radiant Bride Makeup Package',
+      price: '₹2,900',
+      description: 'Complete bridal makeover with premium products.',
+      image: '/packages/1.png',
+      rating: 4.8,
+      totalRatings: 123,
+      duration: '1 hr 20 mins',
+      availability: 'Available Today',
+      originalPrice: 4200,
+      discountedPrice: 2900,
+      discount: 30,
+      advancePayment: 500,
+      forWomen: true,
     },
-    { 
-        id: 2, 
-        name: "Party Glam Makeup", 
-        price: "₹1,500", 
-        description: "Professional party makeup for any occasion.",
-        // 🆕 NEW FIELDS ADDED:
-        rating: 4.6,
-        totalRatings: 89,
-        duration: "45 mins",
-        availability: "Available Today",
-        originalPrice: 2000,
-        discountedPrice: 1500,
-        discount: 25,
-        advancePayment: 300,
-        forWomen: true
+    {
+      id: 2,
+      name: 'Party Glam Makeup',
+      price: '₹1,500',
+      description: 'Professional party makeup for any occasion.',
+      image: '/packages/2.png',
+      rating: 4.6,
+      totalRatings: 89,
+      duration: '45 mins',
+      availability: 'Available Today',
+      originalPrice: 2000,
+      discountedPrice: 1500,
+      discount: 25,
+      advancePayment: 300,
+      forWomen: true,
     },
-    { 
-        id: 3, 
-        name: "Hair Styling & Makeup", 
-        price: "₹3,500", 
-        description: "Complete hair styling with makeup service.",
-        // 🆕 NEW FIELDS ADDED:
-        rating: 4.9,
-        totalRatings: 156,
-        duration: "2 hrs",
-        availability: "Available Today",
-        originalPrice: 5000,
-        discountedPrice: 3500,
-        discount: 30,
-        advancePayment: 700,
-        forWomen: true
+    {
+      id: 3,
+      name: 'Hair Styling & Makeup',
+      price: '₹3,500',
+      description: 'Complete hair styling with makeup service.',
+      image: '/packages/1.png',
+      rating: 4.9,
+      totalRatings: 156,
+      duration: '2 hrs',
+      availability: 'Available Today',
+      originalPrice: 5000,
+      discountedPrice: 3500,
+      discount: 30,
+      advancePayment: 700,
+      forWomen: true,
     },
-];
-
+  ];
 
   const average = 4.8;
   const totalRatings = 2953;
@@ -184,22 +182,7 @@ export default function ArtistPage() {
     service.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const handlePackageClick = (service) => {
-    setSelectedPackage({
-      name: service.name,
-      rating: service.rating,
-      totalRatings: service.totalRatings,
-      duration: service.duration,
-      availability: service.availability,
-      originalPrice: service.originalPrice / 100, // Convert to dollars for component
-      discountedPrice: service.discountedPrice / 100,
-      discount: service.discount,
-      advancePayment: service.advancePayment / 100,
-      description:
-        service.description +
-        ' Our professional staff will ensure you get the best experience possible with premium products and personalized service.',
-      forWomen: service.forWomen,
-    });
+  const handlePackageClick = () => {
     setShowPackageDetails(true);
   };
   return (
@@ -208,17 +191,21 @@ export default function ArtistPage() {
         <title>Akanksha&apos;s Page</title>
       </Head>
       <div className='flex flex-col justify-center items-center bg-gray-100'>
-        {/* Container: Full screen on mobile, centered box on desktop */}
-        <div className='relative w-full max-w-sm bg-white overflow-visible'>
-          <div className='relative w-full overflow-visible'>
-            <Header />
+        <div className='relative  max-w-sm bg-white overflow-visible'>
+          <div className='relative overflow-visible h-[220px] rounded-b-3xl'>
+            {/* Background image */}
+            <div className="absolute inset-0 w-full h-full bg-[url('/bg.png')] bg-cover bg-center z-0" />
+            {/* Header content */}
+            <div className='relative z-30'>
+              <Header />
+            </div>
           </div>
           {/* Profile Image */}
-          <div className='flex flex-row justify-between items-center -mt-20 px-6'>
+          <div className='relative flex flex-row justify-between items-center -mt-16 px-6'>
             <Image
               src={profilePicture}
               alt='Profile Picture'
-              className='border-white border-[5px]'
+              className='border-white border-[2px]'
               width={120}
               height={120}
               objectFit='cover'
@@ -302,7 +289,7 @@ export default function ArtistPage() {
             <TabsList className='flex justify-between gap-[12px] bg-white px-6'>
               <TabsTrigger
                 value='all'
-                className='px-5 font-[400] text-[12px] border border-[rgba(222,222,231,1)] rounded-full bg-white text-gray-700 flex items-center gap-[4px] '
+                className='px-5 font-[400] text-[12px] border border-[rgba(222,222,231,1)] rounded-full bg-white text-gray-700 flex items-center gap-[4px]'
               >
                 All
               </TabsTrigger>
@@ -329,63 +316,85 @@ export default function ArtistPage() {
                       Recommended for you
                     </span>
                     <ChevronDown
-                      className={`w-5 h-5 transform transition-transform duration-200 `}
+                      className={`w-5 h-5 transform transition-transform duration-200 text-purple-600 `}
                     />
                   </div>
                 </CollapsibleTrigger>
-                <CollapsibleContent className="px-6 bg-white">
-                {filteredServices.map((service) => (
-                    // 🆕 ADDED: onClick handler and cursor-pointer
-                    <div key={service.id} className="pb-6 cursor-pointer" onClick={() => handlePackageClick(service)}>
-                        <div className="flex justify-between items-center">
-                            <div className="flex-1">
-                                <h3 className="font-[600] text-[16px] text-[rgba(34,37,51,1)]">{service.name}</h3>
-                                <p className="text-[12px] font-[300] text-[rgba(102,106,123,1)]">Starting from {service.price} • {service.duration}</p>
+                <CollapsibleContent className='px-6 bg-white'>
+                  {filteredServices.map((service) => (
+                    // onClick handler and cursor-pointer
+                    <div
+                      key={service.id}
+                      className='pb-6 cursor-pointer'
+                      onClick={() => handlePackageClick()}
+                    >
+                      <div className='flex justify-between items-center'>
+                        <div className='flex-1'>
+                          <h3 className='font-[600] text-[16px] text-[rgba(34,37,51,1)]'>
+                            {service.name}
+                          </h3>
+                          <p className='text-[12px] font-[300] text-[rgba(102,106,123,1)]'>
+                            Starting from{' '}
+                            <span className='font-medium text-black'>
+                              {service.price}
+                            </span>{' '}
+                            • {service.duration}
+                          </p>
 
-                                <div className="flex items-center gap-1 my-1">
-                                    <div className="flex">
-                                        <span className="text-yellow-400">★</span>
-                                    </div>
-                                    {/* 🆕 UPDATED: Dynamic ratings */}
-                                    <span className="text-[12px] font-[300] text-[rgba(102,106,123,1)]">({service.totalRatings} Ratings)</span>
-                                </div>
-
-                                {/* 🆕 UPDATED: Dynamic advance payment */}
-                                <p className="text-[rgba(0,127,125,1)] text-[12px] font-[300] mb-2">Advance payment ₹{service.advancePayment}</p>
-
-                                <ul className="text-[12px] font-[300] text-[rgba(102,106,123,1)] space-y-1">
-                                    <li className="flex items-start gap-1">
-                                        <span className="min-w-3">•</span>
-                                        <span>Base & eye makeup with top brands like Kryolan / LA Girl</span>
-                                    </li>
-                                    <li className="flex items-start gap-1">
-                                        <span className="min-w-3">•</span>
-                                        <span>Includes basic hairstyling</span>
-                                    </li>
-                                </ul>
+                          <div className='flex items-center gap-1 my-1'>
+                            <div className='flex'>
+                              <span className='text-yellow-400'>★</span>
                             </div>
+                            {/* 🆕 UPDATED: Dynamic ratings */}
+                            <span className='text-[12px] font-[300] text-[rgba(102,106,123,1)]'>
+                              <span className='text-black'>4.7 </span>(
+                              {service.totalRatings} Ratings)
+                            </span>
+                          </div>
 
-                            <div className="flex flex-col items-center">
-                                <Image
-                                    src={profilePicture}
-                                    alt="Service Image"
-                                    className="w-24 h-24 rounded-md object-cover"
-                                />
-                                <button 
-                                    className="bg-white text-purple-600 border border-[rgba(123,60,229,1)] rounded-md px-4 py-1 text-[12px] font-[700] mt-2"
-                                    // 🆕 ADDED: stopPropagation to prevent opening details when clicking ADD
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        // Handle add to cart
-                                    }}
-                                >
-                                    ADD
-                                </button>
-                            </div>
+                          {/* 🆕 UPDATED: Dynamic advance payment */}
+                          <p className='text-[#007A66] text-[12px] font-[300] mb-2 bg-[#E5F5F3] px-1.5 rounded-lg w-max'>
+                            Advance payment ₹{service.advancePayment}
+                          </p>
+
+                          <ul className='text-[12px] font-[300] text-[rgba(102,106,123,1)] space-y-1'>
+                            <li className='flex items-start gap-1'>
+                              <span className='min-w-3'>•</span>
+                              <span>
+                                Base & eye makeup with top brands like Kryolan /
+                                LA Girl
+                              </span>
+                            </li>
+                            <li className='flex items-start gap-1'>
+                              <span className='min-w-3'>•</span>
+                              <span>Includes basic hairstyling</span>
+                            </li>
+                          </ul>
                         </div>
+
+                        <div className='flex flex-col items-center'>
+                          <Image
+                            src={service.image}
+                            alt='Service Image'
+                            className='w-24 h-24 rounded-md object-cover'
+                            width={96}
+                            height={96}
+                          />
+                          <button
+                            className='bg-white text-purple-600 border border-[rgba(123,60,229,1)] rounded-md px-4 py-1 text-[12px] font-[700]  cursor-pointer mt-0.5'
+                            // 🆕 ADDED: stopPropagation to prevent opening details when clicking ADD
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              // Handle add to cart
+                            }}
+                          >
+                            ADD
+                          </button>
+                        </div>
+                      </div>
                     </div>
-                ))}
-            </CollapsibleContent>
+                  ))}
+                </CollapsibleContent>
               </Collapsible>
               <Collapsible className='mb-2'>
                 <CollapsibleTrigger className='w-full bg-white'>
@@ -1356,10 +1365,9 @@ export default function ArtistPage() {
           )}
           {/* Package Details Drawer */}
           <PackageDetailsDrawer
-                        isOpen={showPackageDetails}
-                        onClose={() => setShowPackageDetails(false)}
-                        packageData={selectedPackage}
-                    />
+            isOpen={showPackageDetails}
+            onClose={() => setShowPackageDetails(false)}
+          />
         </div>
       </div>
     </div>

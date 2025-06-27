@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
-import { Button } from "./ui/shared/button"
+import { Button } from "./ui/button"
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false)
