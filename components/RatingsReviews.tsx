@@ -27,14 +27,14 @@ const StarIcon = ({ filled = true }) => (
 const offers = [
   {
     id: 1,
-    image: '/offer-banner.jpg', // Replace with your banner image
+    image: '/bgfooter.png', // Replace with your banner image
     title: 'Look more beautiful and',
     subtitle: 'save more discount',
     badge: 'Up to 50%',
   },
   {
     id: 2,
-    image: '/offer-banner-2.jpg', // Optional second banner
+    image: '/bgfooter.png', // Optional second banner
     title: 'Special offers for you',
     subtitle: 'On premium services',
     badge: 'Flat 30% Off',
@@ -72,7 +72,12 @@ const swiperOptions = {
   },
 };
 
-const RatingsReviews = ({ setRatingsDrawerOpen }) => {
+// Fix linter warning by typing setRatingsDrawerOpen
+interface RatingsReviewsProps {
+  setRatingsDrawerOpen: (open: boolean) => void;
+}
+
+const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
   return (
     <div className='p-4 bg-white shadow-sm'>
       {/* Header */}
@@ -92,12 +97,12 @@ const RatingsReviews = ({ setRatingsDrawerOpen }) => {
       <div className='flex justify-center items-center mb-6 relative'>
         {/* Left laurel */}
         <div className='absolute left-1/2 -translate-x-[100%] top-1/2 -translate-y-1/2'>
-          <img
+          <Image
             src='/leaf.png'
-            width={140} // increased from 107.42
-            height={140} // increased from 107.42
+            width={140}
+            height={140}
             alt='Leaf Icon'
-            // className="-mr-10"
+            priority
           />
         </div>
 
@@ -118,12 +123,13 @@ const RatingsReviews = ({ setRatingsDrawerOpen }) => {
 
         {/* Right laurel */}
         <div className='absolute right-1/2 translate-x-[100%] top-1/2 -translate-y-1/2'>
-          <img
+          <Image
             src='/leaf.png'
             width={140}
             height={140}
             alt='Leaf Icon'
             className='-scale-x-100'
+            priority
           />
         </div>
       </div>
@@ -265,7 +271,7 @@ const RatingsReviews = ({ setRatingsDrawerOpen }) => {
                     <p className='text-sm font-semibold mb-2 px-4'>
                       {offer.subtitle}
                     </p>
-                    <button className='px-6 py-1 bg-white text-black text-sm font-medium rounded-full shadow-sm hover:bg-gray-100 -ml-7'>
+                    <button className='px-6 py-1 bg-white text-black text-sm font-medium rounded-full shadow-sm hover:bg-gray-100 -ml-7 cursor-pointer'>
                       Get offer now!
                     </button>
                   </div>

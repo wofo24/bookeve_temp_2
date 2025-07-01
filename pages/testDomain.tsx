@@ -396,70 +396,6 @@ export default function ArtistPage() {
                   ))}
                 </CollapsibleContent>
               </Collapsible>
-              <Collapsible className='mb-2'>
-                <CollapsibleTrigger className='w-full bg-white'>
-                  <div className='m-0 flex flex-row justify-between w-full items-center hover:bg-accent transition-all duration-200 cursor-pointer p-6'>
-                    <span className='m-0 text-[18px] font-[600] text-purple-600'>
-                      Recommended for you
-                    </span>
-                    <ChevronDown
-                      className={`w-5 h-5 transform transition-transform duration-200 `}
-                    />
-                  </div>
-                </CollapsibleTrigger>
-                <CollapsibleContent className='px-6 bg-white'>
-                  <div className='pb-6'>
-                    <div className='flex justify-between items-center'>
-                      <div className='flex-1'>
-                        <h3 className='font-[600] text-[16px] text-[rgba(34,37,51,1)]'>
-                          HD Radiant Bride Makeup Package
-                        </h3>
-                        <p className='text-[12px] font-[300] text-[rgba(102,106,123,1)]'>
-                          Starting from ₹ 2,900 • 1 hr 20 mins
-                        </p>
-
-                        <div className='flex items-center gap-1 my-1'>
-                          <div className='flex'>
-                            <span className='text-yellow-400'>★</span>
-                          </div>
-                          <span className='text-[12px] font-[300] text-[rgba(102,106,123,1)]'>
-                            (21 Ratings)
-                          </span>
-                        </div>
-
-                        <p className='text-[rgba(0,127,125,1)] text-[12px] font-[300] mb-2'>
-                          Advance payment ₹500
-                        </p>
-
-                        <ul className='text-[12px] font-[300] text-[rgba(102,106,123,1)] space-y-1'>
-                          <li className='flex items-start gap-1'>
-                            <span className='min-w-3'>•</span>
-                            <span>
-                              Base & eye makeup with top brands like Kryolan /
-                              LA Girl
-                            </span>
-                          </li>
-                          <li className='flex items-start gap-1'>
-                            <span className='min-w-3'>•</span>
-                            <span>Includes basic hairstyling</span>
-                          </li>
-                        </ul>
-                      </div>
-
-                      <div className='flex flex-col items-center'>
-                        <Image
-                          src={profilePicture}
-                          alt='Bride Makeup'
-                          className='w-24 h-24 rounded-md object-cover'
-                        />
-                        <button className='bg-white text-purple-600 border border-[rgba(123,60,229,1)] rounded-md px-4 py-1 text-[12px] font-[700]'>
-                          ADD
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </CollapsibleContent>
-              </Collapsible>
             </TabsContent>
             <TabsContent value='location'>
               <p className='text-gray-700 mt-2'>
@@ -482,16 +418,16 @@ export default function ArtistPage() {
                   alt='Instagram Icon'
                 />
                 <div className='flex flex-col gap-[2px]'>
-                  <span className='text-[16px] font-[500]'>
+                  <span className='text-[16px] font-[600]'>
                     payal.makeuparist
                   </span>
-                  <span className='text-[12px] font-[300]'>120k followers</span>
+                  <span className='text-[12px] font-[400]'>120k followers</span>
                 </div>
               </div>
               <div>
                 <button
                   type='button'
-                  className='uppercase font-[500] text-[10px] text-[rgba(43,146,255,1)] underline'
+                  className='uppercase font-[600] text-[10px] text-[#2B92FF] underline cursor-pointer'
                 >
                   View Profile
                 </button>
@@ -512,7 +448,7 @@ export default function ArtistPage() {
                   Booking Policy
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 transform transition-transform duration-200 `}
+                  className={`w-5 h-5 transform transition-transform duration-200 text-gray-500`}
                 />
               </div>
             </CollapsibleTrigger>
@@ -527,7 +463,7 @@ export default function ArtistPage() {
                   Cancellation Policy
                 </span>
                 <ChevronDown
-                  className={`w-5 h-5 transform transition-transform duration-200 `}
+                  className={`w-5 h-5 transform transition-transform duration-200 text-gray-500`}
                 />
               </div>
             </CollapsibleTrigger>
@@ -536,12 +472,12 @@ export default function ArtistPage() {
             </CollapsibleContent>
           </Collapsible>
 
-          <div className='px-6 bg-white py-6 w-full'>
+          <div className='px-6 bg-white py-6 w-full border-b border-dashed border-[rgba(222,222,231,1)]'>
             <Button className='w-full rounded-xl bg-[rgba(34,37,51,1)] text-white font-semibold text-sm gap-2 '>
               <MessageSquare width={18} height={18} /> Chat With Artist
             </Button>
           </div>
-          <div className='bg-white px-6 pb-4'>
+          <div className='bg-white px-6 py-4 '>
             <div className='w-full bg-gradient-to-r from-[#7B3CE5] to-[#6D17FF] border-[3px] border-[#7B3CE5] rounded-xl flex flex-col justify-between max-h-[160px]'>
               {/* Top Section */}
               <div className='flex justify-between items-start p-[16px]'>
