@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { BottomDrawer } from './ui/bottom-drawer';
-import { Star, MessageSquare } from 'lucide-react';
+import { Star, MessageSquare, House, Clock, ArrowRight } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface PackageDetailsProps {
   isOpen: boolean;
@@ -33,10 +35,10 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
     totalRatings: 123,
     duration: '45 minutes',
     availability: 'Available Today',
-    originalPrice: 60.0,
-    discountedPrice: 45.0,
+    originalPrice: 3599.0,
+    discountedPrice: 2599.0,
     discount: 25,
-    advancePayment: 10.0,
+    advancePayment: 500,
     description:
       'This is a comprehensive package that includes all the services you need. Our professional staff will ensure you get the best experience possible.',
     forWomen: true,
@@ -131,14 +133,16 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             {images.map((img, idx) => (
               <div
                 key={idx}
-                className='flex-shrink-0 w-full h-56 snap-center relative'
+                className='flex-shrink-0 w-full h-56 snap-center relative overflow-hidden'
                 style={{ minWidth: '100%' }}
               >
-                <img
+                <Image
                   src={img}
                   alt={`Package image ${idx + 1}`}
-                  className='object-cover w-full h-full rounded-b-xl'
-                  draggable={false}
+                  fill
+                  className='object-cover rounded-b-xl'
+                  sizes='(max-width: 430px) 100vw, 430px'
+                  priority={idx === 0}
                 />
               </div>
             ))}
@@ -180,7 +184,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
 
             {safePackageData.forWomen && (
               <div className='flex flex-row justify-start items-center gap-1'>
-                <div className='w-4 h-4 border-b border-gray-500'></div>
+                <div className='w-4 h-4 text-gray-500 '>♀</div>
                 <span className='text-xs font-medium text-gray-500'>
                   For Women
                 </span>
@@ -188,9 +192,12 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             )}
 
             <div className='flex flex-row justify-start items-center gap-1'>
-              <div className='w-4 h-4 text-gray-500'>⏱</div>
+              <div className='w-4 h-6 text-gray-500'>⏱</div>
               <span className='text-xs font-medium text-gray-500'>
-                {safePackageData.duration} • {safePackageData.availability}
+                Appropriate service time :{' '}
+                <span className='font-bold text-gray-600'>
+                  {safePackageData.duration}
+                </span>
               </span>
             </div>
           </div>
@@ -200,9 +207,9 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
         <div className='flex flex-col items-start gap-3 w-full'>
           <div className='flex flex-col justify-center items-start p-3 gap-3 w-full bg-white border border-gray-200 rounded-lg relative'>
             <div className='flex flex-row items-center gap-1.5 w-full'>
-              <div className='w-4 h-4 text-gray-500'>🏪</div>
+              <House className='w-4 h-4 text-gray-500' />
               <span className='text-xs font-normal text-gray-500'>
-                At Salon
+                At my location
               </span>
             </div>
             <div className='flex flex-row items-center gap-2'>
@@ -218,7 +225,10 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                 </span>
               </div>
             </div>
-            <div className='flex justify-center items-center p-1 px-2 w-full bg-green-50 rounded-md'>
+            <div className='flex my-1 justify-center items-center w-full'>
+              <Button className='w-full font-semibold cursor-pointer'>Add to cart</Button>
+            </div>
+            <div className='flex justify-center items-center p-1 px-1 w-full bg-green-50 rounded-md'>
               <span className='text-xs font-medium text-green-800 text-center'>
                 ₹{safePackageData.advancePayment.toLocaleString()} advance
                 payment required to confirm booking.
@@ -240,7 +250,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             </h2>
 
             <div className='flex flex-row justify-center items-start p-3 px-4 w-full bg-white rounded-xl'>
-              <p className='w-full font-light text-sm leading-snug text-gray-900'>
+              <p className='w-full font-light text-xs leading-snug text-gray-900'>
                 {safePackageData.description}
               </p>
             </div>
@@ -272,7 +282,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
 
             {/* Service Steps Section */}
             <div className='flex flex-col justify-center items-center p-3 px-4 pb-4 gap-4 w-full bg-white rounded-xl'>
-              <h3 className='w-full font-bold text-xl text-gray-900'>
+              <h3 className='w-full font-bold text-lg text-gray-900'>
                 Service Steps
               </h3>
 
@@ -289,7 +299,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                         {index + 1}
                       </span>
                     </div>
-                    <p className='w-full text-base font-light leading-6 text-gray-900'>
+                    <p className='w-full text-sm font-light leading-6 text-gray-900'>
                       {step}
                     </p>
                   </div>
@@ -369,7 +379,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             <div className='flex flex-col items-start gap-3 w-full'>
               <div className='flex flex-row items-center p-2.5 px-3 gap-3 w-full bg-white border border-gray-200 rounded-lg'>
                 <div className='w-6 h-6 relative flex-shrink-0'>
-                  <div className='w-full h-0.5 bg-gray-500 absolute top-1/2 transform -translate-y-1/2'></div>
+                  <div className='w-full h-0.5 text-gray-500 absolute'><Clock/></div>
                 </div>
                 <div className='flex flex-col items-start gap-1 flex-grow'>
                   <h3 className='text-sm font-bold text-gray-900'>
@@ -380,13 +390,13 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                   </p>
                 </div>
                 <div className='flex items-center justify-center w-5 h-5 bg-gray-100 rounded-full'>
-                  <span className='text-xs'>→</span>
+                  <span className='text-xs text-gray-500'><ArrowRight className='w-4 h-4'/></span>
                 </div>
               </div>
 
               <div className='flex flex-row items-center p-2.5 px-3 gap-3 w-full bg-white border border-gray-200 rounded-lg'>
                 <div className='w-6 h-6 relative flex-shrink-0'>
-                  <div className='w-full h-0.5 bg-gray-500 absolute top-1/2 transform -translate-y-1/2'></div>
+                  <div className='w-full h-0.5 text-gray-500 absolute'><Clock/></div>
                 </div>
                 <div className='flex flex-col items-start gap-1 flex-grow'>
                   <h3 className='text-sm font-bold text-gray-900'>
@@ -397,7 +407,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                   </p>
                 </div>
                 <div className='flex items-center justify-center w-5 h-5 bg-gray-100 rounded-full'>
-                  <span className='text-xs'>→</span>
+                  <span className='text-xs text-gray-500'><ArrowRight className='w-4 h-4'/></span>
                 </div>
               </div>
 
@@ -458,11 +468,15 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                 key={service.id}
                 className='flex flex-col w-44 min-w-44 bg-white border border-gray-200 rounded-xl p-2 shadow-sm flex-shrink-0'
               >
-                <img
-                  src={service.image}
-                  alt={service.name}
-                  className='w-full h-28 object-cover rounded-lg mb-2'
-                />
+                <div className='relative w-full h-28 rounded-lg mb-2 overflow-hidden'>
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    className='object-cover'
+                    sizes='(max-width: 430px) 176px, 176px'
+                  />
+                </div>
                 <div className='font-semibold text-sm mb-1'>{service.name}</div>
                 <div className='flex flex-row items-center gap-2 mb-2'>
                   <span className='text-base font-bold text-gray-900'>
