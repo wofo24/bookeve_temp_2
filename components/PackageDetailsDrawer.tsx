@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Image from 'next/image';
 import { BottomDrawer } from './ui/bottom-drawer';
-import { Star, MessageSquare } from 'lucide-react';
+import { Star, MessageSquare, House, Clock, ArrowRight } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface PackageDetailsProps {
   isOpen: boolean;
@@ -17,6 +19,7 @@ interface PackageDetailsProps {
     advancePayment: number;
     description: string;
     forWomen: boolean;
+    images?: string[];
   };
 }
 
@@ -32,13 +35,14 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
     totalRatings: 123,
     duration: '45 minutes',
     availability: 'Available Today',
-    originalPrice: 60.0,
-    discountedPrice: 45.0,
+    originalPrice: 3599.0,
+    discountedPrice: 2599.0,
     discount: 25,
-    advancePayment: 10.0,
+    advancePayment: 500,
     description:
       'This is a comprehensive package that includes all the services you need. Our professional staff will ensure you get the best experience possible.',
     forWomen: true,
+    images: ['/story1.png', '/story2.png', '/story3.png'],
   };
 
   const products = [
@@ -75,9 +79,89 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
     'Please ensure pets are kept in a separate area during the service.',
   ];
 
+  // Carousel state
+  const [currentImage, setCurrentImage] = useState(0);
+  const images = safePackageData.images || [];
+
+  // Scroll handler for carousel
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    const scrollLeft = e.currentTarget.scrollLeft;
+    const width = e.currentTarget.offsetWidth;
+    const idx = Math.round(scrollLeft / width);
+    setCurrentImage(idx);
+  };
+
+  // Example similar services data
+  const similarServices = [
+    {
+      id: 1,
+      name: 'HD Glam Bride Makeup',
+      image: '/story1.png',
+      originalPrice: 3599,
+      discountedPrice: 2599,
+      discount: 30,
+    },
+    {
+      id: 2,
+      name: 'Traditional Bride Look',
+      image: '/story2.png',
+      originalPrice: 2999,
+      discountedPrice: 1999,
+      discount: 33,
+    },
+    {
+      id: 3,
+      name: 'Airbrush Bridal Makeup',
+      image: '/story3.png',
+      originalPrice: 3999,
+      discountedPrice: 2999,
+      discount: 25,
+    },
+  ];
+
   return (
     <BottomDrawer isOpen={isOpen} onClose={onClose} step={1}>
-      <div className='flex flex-col items-start gap-3 bg-white'>
+      {/* Main content area with padding at the bottom for the fixed Add to Cart bar */}
+      <div className='flex flex-col items-start gap-3 bg-white pb-40'>
+        {/* Image Carousel Section */}
+        <div className='w-full relative'>
+          <div
+            className='flex flex-row overflow-x-auto no-scrollbar snap-x snap-mandatory w-full h-56 bg-gray-100 rounded-b-xl'
+            style={{ scrollSnapType: 'x mandatory' }}
+            onScroll={handleScroll}
+          >
+            {images.map((img, idx) => (
+              <div
+                key={idx}
+                className='flex-shrink-0 w-full h-56 snap-center relative overflow-hidden'
+                style={{ minWidth: '100%' }}
+              >
+                <Image
+                  src={img}
+                  alt={`Package image ${idx + 1}`}
+                  fill
+                  className='object-cover rounded-b-xl'
+                  sizes='(max-width: 430px) 100vw, 430px'
+                  priority={idx === 0}
+                />
+              </div>
+            ))}
+          </div>
+          {/* Pagination Dots */}
+          <div className='absolute left-1/2 -translate-x-1/2 bottom-2 flex flex-row gap-2 z-10'>
+            {images.map((_, idx) => (
+              <span
+                key={idx}
+                className={`w-2 h-2 rounded-full ${
+                  currentImage === idx
+                    ? 'bg-white border border-gray-400'
+                    : 'bg-gray-300'
+                } inline-block`}
+              ></span>
+            ))}
+          </div>
+          {/* Close button (if needed, can be added here) */}
+        </div>
         {/* Header Section */}
         <div className='flex flex-col items-start py-0 pb-2 w-full'>
           <div className='flex flex-col items-start gap-2 w-full'>
@@ -100,7 +184,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
 
             {safePackageData.forWomen && (
               <div className='flex flex-row justify-start items-center gap-1'>
-                <div className='w-4 h-4 border-b border-gray-500'></div>
+                <div className='w-4 h-4 text-gray-500 '>♀</div>
                 <span className='text-xs font-medium text-gray-500'>
                   For Women
                 </span>
@@ -108,54 +192,51 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             )}
 
             <div className='flex flex-row justify-start items-center gap-1'>
-              <div className='w-4 h-4 text-gray-500'>⏱</div>
+              <div className='w-4 h-6 text-gray-500'>⏱</div>
               <span className='text-xs font-medium text-gray-500'>
-                {safePackageData.duration} • {safePackageData.availability}
+                Appropriate service time :{' '}
+                <span className='font-bold text-gray-600'>
+                  {safePackageData.duration}
+                </span>
               </span>
             </div>
           </div>
         </div>
 
-        {/* Pricing Section */}
+        {/* Pricing Section (removed Add to Cart button from here) */}
         <div className='flex flex-col items-start gap-3 w-full'>
           <div className='flex flex-col justify-center items-start p-3 gap-3 w-full bg-white border border-gray-200 rounded-lg relative'>
             <div className='flex flex-row items-center gap-1.5 w-full'>
-              <div className='w-4 h-4 text-gray-500'>🏪</div>
+              <House className='w-4 h-4 text-gray-500' />
               <span className='text-xs font-normal text-gray-500'>
-                At Salon
+                At my location
               </span>
             </div>
-
             <div className='flex flex-row items-center gap-2'>
               <span className='text-xl font-bold text-gray-900'>
-                ${safePackageData.discountedPrice.toFixed(2)}
+                ₹{safePackageData.discountedPrice.toLocaleString()}
               </span>
               <span className='text-sm font-normal text-gray-500 line-through'>
-                ${safePackageData.originalPrice.toFixed(2)}
+                ₹{safePackageData.originalPrice.toLocaleString()}
               </span>
               <div className='flex justify-center items-center px-1.5 py-1 bg-green-100 rounded'>
                 <span className='text-xs font-bold text-green-700'>
-                  -{safePackageData.discount}%
+                  {safePackageData.discount}% off
                 </span>
               </div>
             </div>
-
-            <button className='flex justify-center items-center w-full h-12 bg-purple-600 rounded-xl hover:bg-purple-700 transition-colors'>
-              <span className='text-base font-semibold text-white'>
-                Add to cart
-              </span>
-            </button>
-
-            <div className='flex justify-center items-center p-1 px-2 w-full bg-green-50 rounded-md'>
+            <div className='flex my-1 justify-center items-center w-full'>
+              <Button className='w-full font-semibold cursor-pointer'>Add to cart</Button>
+            </div>
+            <div className='flex justify-center items-center p-1 px-1 w-full bg-green-50 rounded-md'>
               <span className='text-xs font-medium text-green-800 text-center'>
-                Advance payment required - $
-                {safePackageData.advancePayment.toFixed(2)}
+                ₹{safePackageData.advancePayment.toLocaleString()} advance
+                payment required to confirm booking.
               </span>
             </div>
-
             <div className='absolute top-4 right-4'>
               <button className='text-xs font-normal text-gray-500 underline'>
-                Check salon price
+                Check saloon price
               </button>
             </div>
           </div>
@@ -169,7 +250,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             </h2>
 
             <div className='flex flex-row justify-center items-start p-3 px-4 w-full bg-white rounded-xl'>
-              <p className='w-full font-light text-sm leading-snug text-gray-900'>
+              <p className='w-full font-light text-xs leading-snug text-gray-900'>
                 {safePackageData.description}
               </p>
             </div>
@@ -201,7 +282,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
 
             {/* Service Steps Section */}
             <div className='flex flex-col justify-center items-center p-3 px-4 pb-4 gap-4 w-full bg-white rounded-xl'>
-              <h3 className='w-full font-bold text-xl text-gray-900'>
+              <h3 className='w-full font-bold text-lg text-gray-900'>
                 Service Steps
               </h3>
 
@@ -218,7 +299,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                         {index + 1}
                       </span>
                     </div>
-                    <p className='w-full text-base font-light leading-6 text-gray-900'>
+                    <p className='w-full text-sm font-light leading-6 text-gray-900'>
                       {step}
                     </p>
                   </div>
@@ -298,7 +379,7 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
             <div className='flex flex-col items-start gap-3 w-full'>
               <div className='flex flex-row items-center p-2.5 px-3 gap-3 w-full bg-white border border-gray-200 rounded-lg'>
                 <div className='w-6 h-6 relative flex-shrink-0'>
-                  <div className='w-full h-0.5 bg-gray-500 absolute top-1/2 transform -translate-y-1/2'></div>
+                  <div className='w-full h-0.5 text-gray-500 absolute'><Clock/></div>
                 </div>
                 <div className='flex flex-col items-start gap-1 flex-grow'>
                   <h3 className='text-sm font-bold text-gray-900'>
@@ -309,13 +390,13 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                   </p>
                 </div>
                 <div className='flex items-center justify-center w-5 h-5 bg-gray-100 rounded-full'>
-                  <span className='text-xs'>→</span>
+                  <span className='text-xs text-gray-500'><ArrowRight className='w-4 h-4'/></span>
                 </div>
               </div>
 
               <div className='flex flex-row items-center p-2.5 px-3 gap-3 w-full bg-white border border-gray-200 rounded-lg'>
                 <div className='w-6 h-6 relative flex-shrink-0'>
-                  <div className='w-full h-0.5 bg-gray-500 absolute top-1/2 transform -translate-y-1/2'></div>
+                  <div className='w-full h-0.5 text-gray-500 absolute'><Clock/></div>
                 </div>
                 <div className='flex flex-col items-start gap-1 flex-grow'>
                   <h3 className='text-sm font-bold text-gray-900'>
@@ -326,41 +407,119 @@ const PackageDetailsDrawer: React.FC<PackageDetailsProps> = ({
                   </p>
                 </div>
                 <div className='flex items-center justify-center w-5 h-5 bg-gray-100 rounded-full'>
-                  <span className='text-xs'>→</span>
+                  <span className='text-xs text-gray-500'><ArrowRight className='w-4 h-4'/></span>
                 </div>
               </div>
 
-              {/* Customization Section */}
-              <div className='flex flex-col items-start gap-3 w-full bg-white'>
-                <div className='flex flex-row justify-between items-center w-full'>
-                  <h3 className='flex-grow font-bold text-base leading-5 text-gray-900'>
-                    Customisation Options
-                  </h3>
-                  <div className='w-6 h-6 flex items-center justify-center'>
-                    <div className='w-4 h-0.5 bg-gray-900'></div>
+              {/* Customisation Section (collapsible) */}
+              <div className='w-full mt-4 border-t border-gray-200 pt-4'>
+                {/* Customisation Collapsible */}
+                <details className='mb-2' open>
+                  <summary className='font-bold text-lg cursor-pointer flex items-center justify-between'>
+                    Customisation
+                    <span className='ml-2'>⌄</span>
+                  </summary>
+                  <div className='mt-2'>
+                    <p className='text-sm mb-2'>
+                      You can choose which brand of makeup you want.
+                    </p>
+                    <div className='bg-purple-50 rounded-xl p-3 flex flex-col items-center'>
+                      <span className='text-gray-500 text-sm mb-2'>
+                        Contact the artist to customize your package.
+                      </span>
+                      <button className='flex flex-row justify-center items-center px-4 gap-2.5 w-full h-12 border-2 border-purple-600 rounded-xl hover:bg-purple-50 transition-colors'>
+                        <MessageSquare className='w-6 h-6 text-purple-600' />
+                        <span className='font-semibold text-base text-purple-600'>
+                          Chat with Artist
+                        </span>
+                      </button>
+                    </div>
                   </div>
-                </div>
-
-                <p className='w-full font-light text-sm leading-6 text-gray-900'>
-                  You can choose which brand of makeup you want.
-                </p>
-
-                <div className='flex flex-col items-center p-2 gap-2 w-full bg-gray-100 rounded-xl'>
-                  <p className='w-full text-center font-light text-sm leading-6 text-gray-900'>
-                    Contact us for customization
-                  </p>
-
-                  <button className='flex flex-row justify-center items-center px-4 gap-2.5 w-full h-12 bg-white border border-purple-600 rounded-xl hover:bg-purple-50 transition-colors'>
-                    <MessageSquare className='w-6 h-6 text-purple-600' />
-                    <span className='font-semibold text-base text-purple-600'>
-                      Chat with Artist
-                    </span>
-                  </button>
+                </details>
+                {/* Cancellation & Refund Collapsible */}
+                <details className='mb-2' open>
+                  <summary className='font-bold text-lg cursor-pointer flex items-center justify-between'>
+                    Cancellation & Refund
+                    <span className='ml-2'>⌄</span>
+                  </summary>
+                  <div className='mt-2'>
+                    <p className='text-sm'>
+                      If cancelled only 50% of the advance money will be
+                      refunded
+                    </p>
+                  </div>
+                </details>
+                {/* Illustration disclaimer */}
+                <div className='text-xs text-gray-500 py-2 border-b border-gray-200'>
+                  Some of the Images shown above are for illustration purpose
+                  actual product may differ
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Similar Services Section */}
+        <div className='w-full mt-4'>
+          <h2 className='font-bold text-lg mb-2'>Similar services</h2>
+          <div className='flex flex-row gap-3 overflow-x-auto pb-2'>
+            {similarServices.map((service) => (
+              <div
+                key={service.id}
+                className='flex flex-col w-44 min-w-44 bg-white border border-gray-200 rounded-xl p-2 shadow-sm flex-shrink-0'
+              >
+                <div className='relative w-full h-28 rounded-lg mb-2 overflow-hidden'>
+                  <Image
+                    src={service.image}
+                    alt={service.name}
+                    fill
+                    className='object-cover'
+                    sizes='(max-width: 430px) 176px, 176px'
+                  />
+                </div>
+                <div className='font-semibold text-sm mb-1'>{service.name}</div>
+                <div className='flex flex-row items-center gap-2 mb-2'>
+                  <span className='text-base font-bold text-gray-900'>
+                    ₹{service.discountedPrice.toLocaleString()}
+                  </span>
+                  <span className='text-xs text-gray-500 line-through'>
+                    ₹{service.originalPrice.toLocaleString()}
+                  </span>
+                  <span className='text-xs font-bold text-green-700'>
+                    {service.discount}% off
+                  </span>
+                </div>
+                <button className='w-full h-9 bg-purple-600 rounded-lg text-white font-semibold text-sm hover:bg-purple-700 transition-colors'>
+                  Add to cart
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      {/* Fixed Add to Cart Bottom Drawer */}
+      <div
+        className='fixed left-0 right-0 bottom-0 z-50 bg-white border-t border-gray-200 shadow-lg flex flex-row items-center justify-between px-4 py-3'
+        style={{ maxWidth: '430px', margin: '0 auto' }}
+      >
+        {/* Price and discount */}
+        <div className='flex flex-col items-start'>
+          <div className='flex flex-row items-center gap-2'>
+            <span className='text-2xl font-bold text-gray-900'>
+              ₹{safePackageData.discountedPrice.toLocaleString()}
+            </span>
+            <span className='text-sm text-gray-500 line-through'>
+              ₹{safePackageData.originalPrice.toLocaleString()}
+            </span>
+            <span className='text-xs font-bold text-green-700 bg-green-100 px-2 py-0.5 rounded'>
+              {safePackageData.discount}% off
+            </span>
+          </div>
+        </div>
+        {/* Add to cart button */}
+        <button className='ml-4 px-8 py-3 bg-purple-600 rounded-xl text-white font-semibold text-base hover:bg-purple-700 transition-colors'>
+          Add to cart
+        </button>
       </div>
     </BottomDrawer>
   );

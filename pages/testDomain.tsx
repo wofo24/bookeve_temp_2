@@ -418,7 +418,7 @@ export default function ArtistPage() {
                   alt='Instagram Icon'
                 />
                 <div className='flex flex-col gap-[2px]'>
-                  <span className='text-[16px] font-[600]'>
+                  <span className='text-[16px] font-[500]'>
                     payal.makeuparist
                   </span>
                   <span className='text-[12px] font-[400]'>120k followers</span>
