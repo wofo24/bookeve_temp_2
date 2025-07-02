@@ -557,7 +557,7 @@ export default function ArtistPage() {
             >
               <div className=''>
                 {/* title */}
-                <div className='border-b border-[rgba(234,234,243,1)] p-2 gap-1 text-xl font-semibold leading-6 text-black'>
+                <div className='border-b border-[rgba(234,234,243,1)] pb-5 text-xl font-semibold  text-black'>
                   Ratings & Reviews
                 </div>
 
@@ -618,16 +618,16 @@ export default function ArtistPage() {
                       {tags?.map((tag) => (
                         <SwiperSlide key={tag.id} className='!w-auto'>
                           <div
-                            className={`border border-[rgba(222,222,231,1)] rounded-md p-[12px] w-[104px] h-[109px] flex flex-col hover:shadow-md transition-shadow justify-center`}
+                            className={`border border-[rgba(222,222,231,1)] rounded-lg p-[12px] w-[104px] h-[109px] flex flex-col  transition-shadow justify-center`}
                           >
                             <Image
                               src={tag.icon}
                               alt='tag'
-                              className='mb-2 items-center'
-                              width={28}
-                              height={28}
+                              className='mb-2 mx-auto items-center'
+                              width={45}
+                              height={45}
                             />
-                            <div className='font-semibold text-sm text-center leading-[18px] tracking-[0] text-[rgba(34,37,51,1)]'>
+                            <div className='font-medium text-sm text-center leading-[18px] tracking-[0] text-[rgba(34,37,51,1)]'>
                               {tag.title}
                             </div>
                           </div>
@@ -638,7 +638,7 @@ export default function ArtistPage() {
                 </div>
                 <div className='relative overflow-hidden mt-6'>
                   <h2 className='text-xl leading-6 font-bold text-gray-800 mb-2'>
-                    All Reviews (100)
+                    All Reviews (1523)
                   </h2>
                   <div className='flex flex-col gap-4'>
                     {[1, 2, 3].map((_, index) => (
@@ -653,16 +653,18 @@ export default function ArtistPage() {
                               src='/review.png'
                               alt='profile'
                               width={36}
-                              height={35}
-                              className='rounded-full mx-1 border-[1px] crop'
+                              height={36}
+                              className='rounded-full mr-1 border-[1px] object-center'
                             />
-                            <h3 className='text-sm font-semibold text-gray-900'>
+                            <div>
+                            <h3 className='text-sm font-semibold text-[#222533]'>
                               Mayuri Singh
                             </h3>
-                          </div>
-                          <p className='text-[11px] text-gray-500 flex'>
+                            <p className='text-[11px] text-gray-500 flex'>
                             Bridal makeup • 2 days ago
                           </p>
+                            </div>
+                          </div>
                         </div>
 
                         {/* Rating */}
@@ -682,7 +684,7 @@ export default function ArtistPage() {
                           A fresh take on the familiar local barbershop. We are
                           a confluence between the warmth of the neighborhood
                           barber and the sleekness that{' '}
-                          <span className='text-indigo-500 font-medium'>
+                          <span className='font-semibold cursor-pointer' >
                             Read more..
                           </span>
                         </p>

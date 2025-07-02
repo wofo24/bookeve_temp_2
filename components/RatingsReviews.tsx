@@ -43,7 +43,7 @@ const offers = [
 
 // Component props with defaults
 const average = 4.8;
-const totalRatings = 2953;
+const totalRatings = 2953;  
 const distribution = [
   { stars: 5, percentage: 85 },
   { stars: 4, percentage: 10 },
