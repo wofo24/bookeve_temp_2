@@ -52,11 +52,20 @@ const distribution = [
   { stars: 1, percentage: 1 },
 ];
 const tags = [
-  { id: 1, title: 'Exceptional Creativity', icon: '🌟', color: 'bg-amber-100' },
-  { id: 2, title: 'Friendly & Reliable', icon: '👍', color: 'bg-green-100' },
-  { id: 3, title: 'Premium Product', icon: '💎', color: 'bg-pink-100' },
-  { id: 4, title: 'Excellent Service', icon: '🏆', color: 'bg-blue-100' },
-  { id: 5, title: 'Great Value', icon: '💰', color: 'bg-purple-100' },
+  {
+    id: 1,
+    title: 'Exceptional Creativity',
+    icon: '/most1.png',
+    color: 'bg-amber-100',
+  },
+  {
+    id: 2,
+    title: 'Friendly & Reliable',
+    icon: '/most2.png',
+    color: 'bg-green-100',
+  },
+  { id: 3, title: 'Premium Product', icon: '/most3.png', color: 'bg-pink-100' },
+  { id: 4, title: 'Premium Product', icon: '/most2.png', color: 'bg-pink-100' }
 ];
 // Swiper options
 const swiperOptions = {
@@ -166,15 +175,21 @@ const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
             modules={[FreeMode, Autoplay]}
             className='ratings-swiper mt-1'
             {...swiperOptions}
-            spaceBetween={8} // set gap between slides
+            spaceBetween={8}
           >
             {tags.map((tag) => (
               <SwiperSlide key={tag.id} className='!w-auto'>
                 <div
                   className={`border border-[rgba(222,222,231,1)] rounded-md p-[12px] w-[90px] h-[94px] flex flex-col gap-[10px] hover:shadow-md transition-shadow`}
                 >
-                  <div className='text-lg mb-0.5 w-[28px] h-[28px]'>
-                    {tag.icon}
+                  <div className='flex justify-center items-center mb-0.5 w-[36px] h-[36px] mx-auto'>
+                    <Image
+                      src={tag.icon}
+                      alt='tag icon'
+                      width={36}
+                      height={36}
+                      className='object-contain'
+                    />
                   </div>
                   <div className='font-medium text-[11px] leading-[145%] tracking-[0] text-[rgba(34,37,51,1)]'>
                     {tag.title}
@@ -198,14 +213,14 @@ const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
           className='!overflow-visible'
         >
           {[1, 2, 3].map((_, index) => (
-            <SwiperSlide key={index} className='!w-[260px]'>
-              <div className='border border-gray-200 rounded-lg p-4 bg-white shadow-sm'>
+            <SwiperSlide key={index} className='!w-[320px]'>
+              <div className='border border-[#E5E7EB] rounded-2xl p-5 bg-white shadow-sm flex flex-col h-full'>
                 {/* Reviewer Info */}
                 <div className='mb-1'>
-                  <h3 className='text-sm font-semibold text-gray-900'>
+                  <h3 className='text-base font-semibold text-gray-900 leading-tight'>
                     Mayuri Singh
                   </h3>
-                  <p className='text-[11px] text-gray-500'>
+                  <p className='text-xs text-gray-500 leading-tight'>
                     Bridal makeup • 2 days ago
                   </p>
                 </div>
@@ -217,11 +232,13 @@ const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
                   <span>⭐</span>
                   <span>⭐</span>
                   <span className='text-gray-400'>☆</span>
-                  <span className='ml-1 text-gray-600 text-[11px]'>4.2</span>
+                  <span className='ml-1 text-gray-600 text-xs font-medium'>
+                    4.2
+                  </span>
                 </div>
 
                 {/* Review Text */}
-                <p className='text-[12px] text-gray-700 leading-[1.3] mb-3'>
+                <p className='text-[13px] text-gray-700 leading-[1.3] mb-3'>
                   A fresh take on the familiar local barbershop. We are a
                   confluence between the warmth of the neighborhood barber and
                   the sleekness that{' '}
@@ -231,17 +248,23 @@ const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
                 </p>
 
                 {/* Images */}
-                <div className='flex gap-2'>
-                  {['/img1.jpg', '/img2.jpg', '/img3.jpg'].map((img, idx) => (
-                    <Image
-                      key={idx}
-                      src={img}
-                      alt='preview'
-                      width={60}
-                      height={60}
-                      className='object-cover rounded-md'
-                    />
-                  ))}
+                <div className='flex gap-2 mt-auto'>
+                  {['/reviewpic.png', '/reviewpic1.png', '/reviewpic2.png'].map(
+                    (img, idx) => (
+                      <div
+                        key={idx}
+                        className='w-16 h-16 rounded-lg overflow-hidden flex-shrink-0'
+                      >
+                        <Image
+                          src={img}
+                          alt='preview'
+                          width={48}
+                          height={48}
+                          className='object-cover w-full h-full rounded-lg'
+                        />
+                      </div>
+                    )
+                  )}
                 </div>
               </div>
             </SwiperSlide>
@@ -254,13 +277,15 @@ const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
           {offers.map((offer) => (
             <SwiperSlide key={offer.id}>
               <div className='relative w-full rounded-xl overflow-hidden shadow-md bg-white'>
-                <Image
-                  src={offer.image}
-                  width={60}
-                  height={60}
-                  alt='Beauty Offer'
-                  className='w-full h-36 object-cover'
-                />
+                <div className='relative w-full h-36'>
+                  <Image
+                    src={offer.image}
+                    alt='Beauty Offer'
+                    fill
+                    className='object-cover'
+                    priority
+                  />
+                </div>
 
                 {/* Gradient Overlay */}
                 <div className='absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-2'>
