@@ -43,7 +43,7 @@ const offers = [
 
 // Component props with defaults
 const average = 4.8;
-const totalRatings = 2953;  
+const totalRatings = 2953;
 const distribution = [
   { stars: 5, percentage: 85 },
   { stars: 4, percentage: 10 },
@@ -65,7 +65,7 @@ const tags = [
     color: 'bg-green-100',
   },
   { id: 3, title: 'Premium Product', icon: '/most3.png', color: 'bg-pink-100' },
-  { id: 4, title: 'Premium Product', icon: '/most2.png', color: 'bg-pink-100' }
+  { id: 4, title: 'Premium Product', icon: '/most2.png', color: 'bg-pink-100' },
 ];
 // Swiper options
 const swiperOptions = {
@@ -89,6 +89,21 @@ interface RatingsReviewsProps {
 const RatingsReviews = ({ setRatingsDrawerOpen }: RatingsReviewsProps) => {
   return (
     <div className='p-4 bg-white shadow-sm'>
+      <div className='mb-6'>
+        <div className='flex items-center gap-2 my-4'>
+          <h2 className='text-xs font-bold text-gray-800 mb-0 whitespace-nowrap'>
+            ABOUT THE ARTIST
+          </h2>
+          <div className='flex-1 h-px border-t border-dashed border-[rgba(222,222,231,1)]'></div>
+        </div>
+        <p className='text-[15px] text-[#222533] leading-snug'>
+          We provide a full range of high-quality beauty services delivered by
+          skilled specialists, including Russian-speaking professionals and
+          expert cosmetologists. Using only premium materials, we ensure
+          exceptional results in a cozy, welcoming atmosphere. Book an
+          appointment today and experience the difference!
+        </p>
+      </div>
       {/* Header */}
       <div className='flex justify-between items-center mb-4'>
         <span className='text-[18px] font-[600] text-[rgba(34,37,51,1)]'>
