@@ -1,3 +1,4 @@
+// components/Header.tsx (Updated with Context)
 'use client';
 
 import { useState } from 'react';
@@ -22,12 +23,26 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import LoginModal from './auth/LoginModal';
+import { useAuthContext } from './auth/AuthProvider';
 
-export default function Component() {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const { user, logout } = useAuthContext();
+
+  const handleLoginClick = () => {
+    setIsOpen(false); // Close drawer first
+    setShowLoginModal(true);
+  };
+
+  const handleLogoutClick = () => {
+    logout();
+    setIsOpen(false);
+  };
 
   return (
-    <div className='mb-24 '>
+    <div className='mb-24'>
       <div className='max-w-md mx-auto'>
         {/* Header */}
         <header className='flex items-center justify-between p-4 border-b border-gray-200 backdrop-blur-lg'>
@@ -56,23 +71,32 @@ export default function Component() {
             <DrawerContent className='h-full w-full max-w-sm ml-auto bg-white text-black'>
               <div className='flex flex-col h-full'>
                 {/* Header Section */}
-                <DrawerHeader className='p-4 pb-6 '>
+                <DrawerHeader className='p-4 pb-6'>
                   <div className='flex items-center'>
-                    <div>
+                    <div className='w-full'>
                       <DrawerTitle className='text-xl font-semibold text-left text-black'>
-                        Hey there 👋
+                        {user ? `Hey ${user.name || 'there'} 👋` : 'Hey there 👋'}
                       </DrawerTitle>
                       <p className='text-sm text-gray-600 mt-1'>
-                        You have not logged in yet
+                        {user ? `Logged in as +91 ${user.phoneNumber}` : 'You have not logged in yet'}
                       </p>
-                      <button className='py-4 px-22 rounded-2xl bg-purple-600 text-white text-xl mt-4 font-bold'>
-                        Login
-                      </button>
+                      {!user ? (
+                        <button 
+                          onClick={handleLoginClick}
+                          className='py-3 px-8 rounded-2xl bg-purple-600 text-white text-lg mt-4 font-bold hover:bg-purple-700 transition-colors'
+                        >
+                          Login
+                        </button>
+                      ) : (
+                        <div className='mt-4 p-3 bg-green-50 rounded-lg border border-green-200'>
+                          <p className='text-sm text-green-700 font-medium'>✓ Successfully logged in</p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </DrawerHeader>
 
-                {/* Menu Items - keep the same content */}
+                {/* Menu Items */}
                 <div className='flex-1 py-3 overflow-y-auto'>
                   {/* Profile Section */}
                   <div className='mb-6'>
@@ -106,16 +130,21 @@ export default function Component() {
                       </div>
                     </div>
 
-                    <div className='flex items-center gap-3 p-3 border-b border-gray-200 cursor-pointer'>
-                      <LogOut className='h-5 w-5 text-gray-600' />
-                      <div>
-                        <p className='font-medium text-gray-500'>Log out</p>
+                    {user && (
+                      <div 
+                        className='flex items-center gap-3 p-3 border-b border-gray-200 cursor-pointer hover:bg-red-50'
+                        onClick={handleLogoutClick}
+                      >
+                        <LogOut className='h-5 w-5 text-red-600' />
+                        <div>
+                          <p className='font-medium text-red-600'>Log out</p>
+                        </div>
                       </div>
-                    </div>
+                    )}
                   </div>
 
                   {/* Bookeve Logo */}
-                  <div className='px-4 mt-10  border-b border-gray-200'>
+                  <div className='px-4 mt-10 border-b border-gray-200'>
                     <div className='bg-white text-white px-4 py-2 rounded-lg inline-block'>
                       <Image
                         src='/logo.png?height=40&width=120'
@@ -130,17 +159,17 @@ export default function Component() {
                   {/* Bottom Menu Items */}
                   <div className='space-y-2'>
                     <div className='flex items-center gap-3 p-3 border-b border-gray-200 cursor-pointer'>
-                      <MessageCircle className='h-5 w-5 ' />
+                      <MessageCircle className='h-5 w-5' />
                       <p className='font-medium'>About Us</p>
                     </div>
 
                     <div className='flex items-center gap-3 p-3 border-b border-gray-200 cursor-pointer'>
-                      <Phone className='h-5 w-5 ' />
+                      <Phone className='h-5 w-5' />
                       <p className='font-medium'>Contact Us</p>
                     </div>
 
                     <div className='flex items-center gap-3 p-3 border-b border-gray-200 cursor-pointer'>
-                      <HelpCircle className='h-5 w-5 ' />
+                      <HelpCircle className='h-5 w-5' />
                       <p className='font-medium'>FAQs</p>
                     </div>
 
@@ -157,6 +186,12 @@ export default function Component() {
           </Drawer>
         </header>
       </div>
+
+      {/* Login Modal */}
+      <LoginModal 
+        isOpen={showLoginModal} 
+        onClose={() => setShowLoginModal(false)} 
+      />
     </div>
   );
 }
