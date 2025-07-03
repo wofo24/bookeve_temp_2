@@ -25,7 +25,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: 'DM Sans', sans-serif, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Mobile login page specific styles */
+.login-container {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+  background: white;
+}
+
+/* Disable text selection on number pad */
+.number-pad button {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Ensure inputs don't zoom on iOS */
+input[type="text"], input[type="tel"] {
+  font-size: 16px;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0px);

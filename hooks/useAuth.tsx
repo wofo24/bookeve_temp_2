@@ -20,24 +20,24 @@ export const useAuth = () => {
     error: null,
   });
 
-  const sendOTP = async (phoneNumber: string): Promise<boolean> => {
-    setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
-    
+  const sendOTP = async (): Promise<boolean> => {
+    setAuthState((prev) => ({ ...prev, isLoading: true, error: null }));
+
     try {
       // Simulate API call to send OTP
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
+      await new Promise((resolve) => setTimeout(resolve, 1500));
+
       // In a real implementation, you would call your backend API here
       // const response = await fetch('/api/auth/send-otp', {
       //   method: 'POST',
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify({ phoneNumber }),
       // });
-      
-      setAuthState(prev => ({ ...prev, isLoading: false }));
+
+      setAuthState((prev) => ({ ...prev, isLoading: false }));
       return true;
-    } catch (error) {
-      setAuthState(prev => ({
+    } catch {
+      setAuthState((prev) => ({
         ...prev,
         isLoading: false,
         error: 'Failed to send OTP. Please try again.',
@@ -46,21 +46,24 @@ export const useAuth = () => {
     }
   };
 
-  const verifyOTP = async (phoneNumber: string, otp: string): Promise<boolean> => {
-    setAuthState(prev => ({ ...prev, isLoading: true, error: null }));
-    
+  const verifyOTP = async (
+    _phoneNumber: string,
+    otp: string
+  ): Promise<boolean> => {
+    setAuthState((prev) => ({ ...prev, isLoading: true, error: null }));
+
     try {
       // Simulate API call to verify OTP
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // For demo purposes, accept any 6-digit OTP
-      if (otp.length === 6) {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      // For demo purposes, accept any 4-digit OTP
+      if (otp.length === 4) {
         const user: User = {
-          phoneNumber,
+          phoneNumber: '', // This would come from your backend
           name: 'User', // This would come from your backend
           isAuthenticated: true,
         };
-        
+
         setAuthState({
           user,
           isLoading: false,
@@ -70,8 +73,8 @@ export const useAuth = () => {
       } else {
         throw new Error('Invalid OTP');
       }
-    } catch (error) {
-      setAuthState(prev => ({
+    } catch {
+      setAuthState((prev) => ({
         ...prev,
         isLoading: false,
         error: 'Invalid OTP. Please try again.',
@@ -89,7 +92,7 @@ export const useAuth = () => {
   };
 
   const clearError = () => {
-    setAuthState(prev => ({ ...prev, error: null }));
+    setAuthState((prev) => ({ ...prev, error: null }));
   };
 
   return {

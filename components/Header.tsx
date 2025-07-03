@@ -1,7 +1,8 @@
-// components/Header.tsx (Updated with Context)
+// components/Header.tsx (Updated for login route)
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { Button } from '@/components/ui/button';
 import {
   Drawer,
@@ -23,17 +24,18 @@ import {
 } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import LoginModal from './auth/LoginModal';
 import { useAuthContext } from './auth/AuthProvider';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showLoginModal, setShowLoginModal] = useState(false);
   const { user, logout } = useAuthContext();
+  const router = useRouter();
 
   const handleLoginClick = () => {
     setIsOpen(false); // Close drawer first
-    setShowLoginModal(true);
+    // Redirect to login page with return URL
+    const currentPath = router.asPath;
+    router.push(`/login?returnUrl=${encodeURIComponent(currentPath)}`);
   };
 
   const handleLogoutClick = () => {
@@ -78,7 +80,7 @@ export default function Header() {
                         {user ? `Hey ${user.name || 'there'} 👋` : 'Hey there 👋'}
                       </DrawerTitle>
                       <p className='text-sm text-gray-600 mt-1'>
-                        {user ? `Logged in as +91 ${user.phoneNumber}` : 'You have not logged in yet'}
+                        {user ? `Logged in as ${user.phoneNumber}` : 'You have not logged in yet'}
                       </p>
                       {!user ? (
                         <button 
@@ -88,9 +90,7 @@ export default function Header() {
                           Login
                         </button>
                       ) : (
-                        <div className='mt-4 p-3 bg-green-50 rounded-lg border border-green-200'>
-                          <p className='text-sm text-green-700 font-medium'>✓ Successfully logged in</p>
-                        </div>
+                        <br/>
                       )}
                     </div>
                   </div>
@@ -186,12 +186,6 @@ export default function Header() {
           </Drawer>
         </header>
       </div>
-
-      {/* Login Modal */}
-      <LoginModal 
-        isOpen={showLoginModal} 
-        onClose={() => setShowLoginModal(false)} 
-      />
     </div>
   );
 }
