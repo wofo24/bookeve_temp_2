@@ -26,8 +26,8 @@ export default function LoginPage() {
   };
 
   const handleOTPSuccess = async () => {
-    const returnUrl = (router.query.returnUrl as string) || '/testDomain';
-    router.push(returnUrl);
+    const returnUrl = router.query.returnUrl as string || '/testDomain';
+    router.push(`/profile-completion?returnUrl=${encodeURIComponent(returnUrl)}`);
   };
 
   const handleBackToPhone = () => {

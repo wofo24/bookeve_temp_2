@@ -2,10 +2,22 @@
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
+interface UserProfile {
+  fullName: string;
+  email: string;
+  gender: string;
+  houseNumber: string;
+  pincode: string;
+  state: string;
+  city: string;
+}
+
 interface User {
   phoneNumber: string;
   name?: string;
   isAuthenticated: boolean;
+  profile?: UserProfile; // Optional profile data
+  profileCompleted?: boolean; 
 }
 
 interface AuthContextType {
@@ -14,6 +26,7 @@ interface AuthContextType {
   error: string | null;
   sendOTP: (phoneNumber: string) => Promise<boolean>;
   verifyOTP: (phoneNumber: string, otp: string) => Promise<boolean>;
+  updateUserProfile: (profileData: UserProfile) => Promise<boolean>;
   logout: () => void;
   clearError: () => void;
 }

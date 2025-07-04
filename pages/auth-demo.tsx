@@ -46,7 +46,7 @@ export default function AuthDemo() {
               🎉 Welcome to Bookeve!
             </h1>
             <p className="text-gray-600">
-              You're successfully logged in
+              You&apos;re successfully logged in
             </p>
           </div>
 
@@ -135,7 +135,7 @@ export default function AuthDemo() {
               💡 How to test:
             </h4>
             <ul className="text-xs text-blue-700 space-y-1">
-              <li>• Try accessing this page without login (you'll be redirected)</li>
+              <li>• Try accessing this page without login (you&apos;ll be redirected)</li>
               <li>• Test login with different country codes</li>
               <li>• Use any 6-digit code for OTP verification</li>
               <li>• Check header menu for login status</li>
